@@ -129,7 +129,7 @@ function init() {
         }
     }
     snake = [];
-    for (var i = 0; i < 4; i++) addSnakeNode();
+    for (var i = 0; i < 8; i++) addSnakeNode();
     window.requestAnimationFrame(update);
 }
 
@@ -153,7 +153,6 @@ function drawPoint(point, radius, red) {
     var p = copyPoint(point);
 
     // Translate so that sphere origin is (0, 0, 2).
-    if (p.z >= -.5) return;
     p.z += 2;
 
     // This orients it so z axis is more negative the closer to you it is,
@@ -169,9 +168,11 @@ function drawPoint(point, radius, red) {
 
     ctx.beginPath();
 
+    // Transparent based on depth.
+    var alpha = 1 - (p.z - 1) / 2;
     // Color based on depth.
     var depthColor = 255 - Math.floor((p.z - 1) / 2 * 255);
-    ctx.fillStyle = "rgb(" + red + ", 0, " + depthColor + ")";
+    ctx.fillStyle = "rgba(" + red + ", 0, " + depthColor + ", " + alpha + ")";
     ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
     ctx.fill();
 }
