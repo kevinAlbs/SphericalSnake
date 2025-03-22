@@ -38,7 +38,7 @@ var leaderboard = (function() {
 
         // Update local storage.
         if (highScore.set && highScore.score != 0) {
-            localStorage.setItem("highScore", JSON.stringify(highScore));
+            localStorage.setItem("spherical_snake_highScore", JSON.stringify(highScore));
         }
     }
 
@@ -64,7 +64,7 @@ var leaderboard = (function() {
     });
 
     function loadScore() {
-        const highScore_json = localStorage.getItem("highScore");
+        const highScore_json = localStorage.getItem("spherical_snake_highScore");
         if (!highScore_json) {
             return;
         }
