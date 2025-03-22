@@ -2,4 +2,4 @@
 
 Snake game on a sphere. Play here: https://kevinalbs.com/spherical_snake
 
-![Spherical Snake Gameplay](./img/gameplay.gif)
+![Spherical Snake Gameplay](./gameplay.gif)
