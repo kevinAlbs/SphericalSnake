@@ -43,6 +43,29 @@ window.addEventListener('keyup', function(e) {
     if (e.keyCode == 39) rightDown = false;
 });
 
+
+const btnMoveLeft = document.querySelector("#move_left");
+btnMoveLeft.addEventListener("pointerdown", function () {
+    leftDown = true;
+});
+btnMoveLeft.addEventListener("pointerleave", function () {
+    leftDown = false;
+});
+btnMoveLeft.addEventListener("pointerup", function () {
+    leftDown = false;
+});
+
+const btnMoveRight = document.querySelector("#move_right");
+btnMoveRight.addEventListener("pointerdown", function () {
+    rightDown = true;
+});
+btnMoveRight.addEventListener("pointerleave", function () {
+    rightDown = false;
+});
+btnMoveRight.addEventListener("pointerup", function () {
+    rightDown = false;
+});
+
 function regeneratePellet() {
     pellet = pointFromSpherical(Math.random() * Math.PI * 2, Math.random() * Math.PI);
 }
