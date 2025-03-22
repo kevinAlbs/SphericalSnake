@@ -1,18 +1,18 @@
 // TODO: Consider PIXI.js or WebGL rendering to experiment.
 
-// Will not render a jump of more than thirty frames per second.
-var MAX_DELTA = 1000 / 30; 
-
 // Angle representing the radius of one snake node.
 var NODE_ANGLE = Math.PI / 80;
 
 // This is the number of positions stored in the node queue.
 // This determines the velocity.
-var NODE_QUEUE_SIZE = 12;
+var NODE_QUEUE_SIZE = 9;
 
 var STARTING_DIRECTION = Math.PI / 4;
 
-var cnv, ctx, width, height, centerX, centerY, points, delta, clock, stopped;
+var cnv, ctx, width, height, centerX, centerY, points, stopped;
+
+var clock; // Absolute time since last update.
+var accumulatedDelta = 0; // How much delta time is built up.
 
 // An array of snake nodes.
 var snake;
@@ -113,7 +113,6 @@ function init() {
     centerX = width / 2;
     centerY = height / 2;
     points = [];
-    delta = 0;
     clock = Date.now();
     leftDown = false;
     rightDown = false;
@@ -136,15 +135,29 @@ function init() {
 function update() {
     if (stopped) return;
     var curr = Date.now();
-    delta = Math.min(curr - clock, MAX_DELTA);
+    var delta = curr - clock;
     clock = curr;
 
-    checkCollisions();
-    render();
-    if (leftDown) direction -= .05;
-    if (rightDown) direction += .05;
+    accumulatedDelta += delta;
+    var targetDelta = 15;
+    if (accumulatedDelta > targetDelta * 4) {
+        // Cap the accumulated delta. Avoid an unbounded number of updates. Slow down game.
+        accumulatedDelta = targetDelta * 4;
+    }
 
-    applySnakeRotation();
+    while (accumulatedDelta >= targetDelta) {
+        accumulatedDelta -= targetDelta;
+        checkCollisions();
+        
+        if (leftDown) direction -= .08;
+        if (rightDown) direction += .08;
+    
+        applySnakeRotation();
+        rotateZ(-direction);
+        rotateY(-snakeVelocity);
+        rotateZ(direction);
+    }
+    render();
     window.requestAnimationFrame(update);
 }
 
@@ -179,9 +192,6 @@ function drawPoint(point, radius, red) {
 
 function render() {
     ctx.clearRect(0, 0, width, height);
-    rotateZ(-direction);
-    rotateY(-snakeVelocity);
-    rotateZ(direction);
     for(var i = 0; i < points.length; i++) {
         drawPoint(points[i], 1 / 250, 0);
     }
@@ -245,7 +255,6 @@ function rotateY(a, pt) {
 }
 
 function applySnakeRotation() {
-    // TODO: ensure this only happens once per fixed delta frame.
     var nextPosition = null;
     for (var i = 0; i < snake.length; i++) {
         var oldPosition = copyPoint(snake[i]); 
