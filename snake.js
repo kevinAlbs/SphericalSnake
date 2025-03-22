@@ -45,24 +45,30 @@ window.addEventListener('keyup', function(e) {
 
 
 const btnMoveLeft = document.querySelector("#move_left");
-btnMoveLeft.addEventListener("pointerdown", function () {
+btnMoveLeft.addEventListener("pointerdown", function (e) {
+    e.preventDefault();
     leftDown = true;
 });
-btnMoveLeft.addEventListener("pointerleave", function () {
+btnMoveLeft.addEventListener("pointerleave", function (e) {
+    e.preventDefault();
     leftDown = false;
 });
-btnMoveLeft.addEventListener("pointerup", function () {
+btnMoveLeft.addEventListener("pointerup", function (e) {
+    e.preventDefault();
     leftDown = false;
 });
 
 const btnMoveRight = document.querySelector("#move_right");
-btnMoveRight.addEventListener("pointerdown", function () {
+btnMoveRight.addEventListener("pointerdown", function (e) {
+    e.preventDefault();
     rightDown = true;
 });
-btnMoveRight.addEventListener("pointerleave", function () {
+btnMoveRight.addEventListener("pointerleave", function (e) {
+    e.preventDefault();
     rightDown = false;
 });
-btnMoveRight.addEventListener("pointerup", function () {
+btnMoveRight.addEventListener("pointerup", function (e) {
+    e.preventDefault();
     rightDown = false;
 });
 
