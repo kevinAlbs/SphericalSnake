@@ -33,6 +33,8 @@ var focalLength = 200;
 
 var leftDown, rightDown;
 
+var score = 0;
+
 window.addEventListener('keydown', function(e) {
     if (e.keyCode == 37) leftDown = true;
     if (e.keyCode == 39) rightDown = true;
@@ -89,6 +91,11 @@ function addSnakeNode() {
         }
     }
     snake.push(snakeNode);
+}
+
+function incrementScore() {
+    score += 1;
+    leaderboard.setScore (score);
 }
 
 function allPoints() {
@@ -275,6 +282,7 @@ function checkCollisions() {
     if (collision(snake[0], pellet)) {
         regeneratePellet();
         addSnakeNode();
+        incrementScore();
     }
 }
 

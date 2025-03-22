@@ -3,24 +3,45 @@
 <html lang='en'>
 <head>
     <meta charset='utf-8'>
-
-    <title>Spherical Snake</title>
-    <meta name='description' content='Snake retrofitted to a sphere'>
+    <meta name='description' content='Snake on a sphere'>
     <meta name='author' content='Kevin Albertson'>
+    <title>Spherical Snake</title>
 
+    <!-- reCaptcha -->
+    <!-- <script src="https://www.google.com/recaptcha/enterprise.js?render=6Le6rvwqAAAAAIhHsQfZPb6pkU9nUnnkqD5mqADl"></script> -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Le6rvwqAAAAAIhHsQfZPb6pkU9nUnnkqD5mqADl"></script>
     <style type='text/css'>
         body {
             background: #E1F0F5;
+            font-family: monospace;
+        }
+        #score, #gg {
+            font-size: 2em;
+            margin: 0;
+            text-align: center;
+            background: rgba(0,0,0,.8);
+            color: #FFF;
+            padding: 10px 0px;
+        }
+        #container {
+            width: 600px;
+            margin: 10px auto;
+            position: relative;
         }
     	canvas {
     		border: 1px black solid;
-    		margin: 10px auto;
     		display: block;
             background: #FFF;
     	}
         #gg {
-            text-align: center;
+            width: 600px;
             display: none;
+            position: absolute;
+            top: 220px;
+        }
+        /* hide reCaptcha badge */
+        .grecaptcha-badge {
+            display: none !important;
         }
     </style>
 
@@ -30,8 +51,20 @@
 </head>
 
 <body>
-    <p id='gg'>Good game!</p>
-    <canvas width='600' height='400'></canvas>
+    <div id="container">
+        <p id="score">Score: 0</p>
+        <p id='gg'>Good game! Refresh to play again.</span></p>
+        <canvas width='600' height='400'></canvas>
+        <div id="leaderboard_area">
+            <a href="#" id="submit_last_score" class="hidden"></a>
+            <div id="show_high_score_section">
+                <span id="high_score"></span> <a href="#" id="submit_high_score" class="hidden">Submit to
+                    leaderboard</a>
+            </div>
+            <div><a href="/spherical_snake/leaderboard/" target="_blank" id="show_high_score_link">See leaderboard</a></div>
+        </div>
+    </div> <!-- #container -->
+    <script src='leaderboard.js'></script>
     <script src='snake.js'></script>
     
 </body>
