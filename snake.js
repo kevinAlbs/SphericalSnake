@@ -1,5 +1,3 @@
-// TODO: Consider PIXI.js or WebGL rendering to experiment.
-
 // Angle representing the radius of one snake node.
 var NODE_ANGLE = Math.PI / 80;
 
