@@ -202,11 +202,13 @@ function render() {
     // Draw angle.
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
-    var r = NODE_ANGLE / 2 * focalLength;
+    var r = NODE_ANGLE / 2 * focalLength * 2.2;
     ctx.lineTo(centerX + Math.cos(direction) * r,
         centerY + Math.sin(direction) * r);
-    ctx.strokeStyle = "#000";
+    ctx.strokeStyle = "#FFF";
+    ctx.lineWidth = 3;
     ctx.stroke();
+    ctx.lineWidth = 1;
 
     // Draw circle.
     ctx.beginPath();
