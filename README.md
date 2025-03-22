@@ -1,7 +1,5 @@
-Things learned:
+# Spherical Snake
 
-- Rotating along an axis which is on one of the three standard planes only requires three rotations. E.g. rotating along axis on XY plane of angle A with x axis can be done as follows:
+Snake game on a sphere. Play here: https://kevinalbs.com/spherical_snake
 
-RotateZ (90 - A) to orient axis up
-RotateY (amount) to do the rotation
-RotateZ (- (90 - A)) to orient axis back
+![Spherical Snake Gameplay](./img/gameplay.gif)
