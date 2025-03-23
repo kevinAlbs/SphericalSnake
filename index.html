@@ -27,6 +27,7 @@
         * {
             margin: 0;
             -webkit-tap-highlight-color: transparent;
+            touch-action: none;
         }
         body {
             background: #E1F0F5;
@@ -72,7 +73,8 @@
         #mobile_controls {
             position: relative;
             user-select: none;
-            height: 120px;
+            height: 10px;
+            top: -100px;
         }
 
         .button {
@@ -84,28 +86,29 @@
             border: 4px #333 solid;
             position: absolute;
             cursor: pointer;
+            touch-action: manipulation;
         }
 
         #move_left {
             vertical-align: center;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             text-align: center;
             font-size: 50px;
-            left: 0px;
+            left: 10px;
             top: 10px;
-            background: url("left.png") 23px 26px no-repeat #EEE;
+            background: url("left.png") 18px 21px no-repeat #EEE;
         }
 
         #move_right {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             vertical-align: center;
             text-align: center;
             font-size: 50px;
-            right: 0px;
+            right: 10px;
             top: 10px;
-            background: url("right.png") 28px 26px no-repeat #EEE;
+            background: url("right.png") 23px 21px no-repeat #EEE;
         }
 
         #mobile_controls .button.down {
