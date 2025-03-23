@@ -46,7 +46,7 @@
         }
 
         #main table {
-            width: 100%;
+            width: 95%;
             margin-bottom: 10px;
             table-layout: fixed;
         }
