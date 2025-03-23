@@ -79,7 +79,7 @@
             background: #EEE;
             display: inline-block;
             user-select: none;
-            border-radius: 10px;
+            border-radius: 50px;
             border: 4px #333 solid;
             position: absolute;
             cursor: pointer;
@@ -93,6 +93,7 @@
             font-size: 50px;
             left: 0px;
             top: 10px;
+            background: url("left.png") 23px 26px no-repeat #EEE;
         }
 
         #move_right {
@@ -103,6 +104,11 @@
             font-size: 50px;
             right: 0px;
             top: 10px;
+            background: url("right.png") 28px 26px no-repeat #EEE;
+        }
+
+        #mobile_controls .button.down {
+            background-color: #67bfff;
         }
 
         #refresh {
@@ -124,8 +130,8 @@
         <p id='gg'>Good game! <a id="refresh" href="#">Play again?</a></p>
         <canvas width='358' height='360'></canvas>
         <div id="mobile_controls">
-            <span class="button" id="move_left">&lt;</span>
-            <span class="button" id="move_right">&gt;</span>
+            <span class="button" id="move_left"></span>
+            <span class="button" id="move_right"></span>
         </div>
         <div id="leaderboard_area">
             <p>To play: Use arrow keys or buttons.</p>
@@ -133,12 +139,12 @@
             <div id="show_high_score_section">
                 <span id="high_score"></span> <a href="#" id="submit_high_score" class="hidden">Submit to
                     leaderboard</a>
+                </div>
+                <div><a href="/spherical_snake/leaderboard/" target="_blank" id="show_high_score_link">See leaderboard</a></div>
+                <p>See <a href="https://github.com/kevinAlbs/SphericalSnake">source on GitHub</a></p>
             </div>
-            <div><a href="/spherical_snake/leaderboard/" target="_blank" id="show_high_score_link">See leaderboard</a></div>
-            <p>See <a href="https://github.com/kevinAlbs/SphericalSnake">source on GitHub</a></p>
-        </div>
-    </div> <!-- #container -->
-    <script src='leaderboard.js'></script>
+        </div> <!-- #container -->
+        <script src='leaderboard.js'></script>
     <script src='snake.js'></script>
     
 </body>

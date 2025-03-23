@@ -33,44 +33,64 @@ var leftDown, rightDown;
 
 var score = 0;
 
+const btnMoveLeft = document.querySelector("#move_left");
+function setLeft(val) {
+    if (val) {
+        leftDown = true;
+        btnMoveLeft.classList.add("down");
+    } else {
+        leftDown = false;
+        btnMoveLeft.classList.remove("down");   
+    }
+}
+
+const btnMoveRight = document.querySelector("#move_right");
+function setRight(val) {
+    if (val) {
+        rightDown = true;
+        btnMoveRight.classList.add("down");
+    } else {
+        rightDown = false;
+        btnMoveRight.classList.remove("down");   
+    }
+}
+
 window.addEventListener('keydown', function(e) {
-    if (e.keyCode == 37) leftDown = true;
-    if (e.keyCode == 39) rightDown = true;
+    if (e.key == "ArrowLeft") setLeft(true);
+    if (e.key == "ArrowRight") setRight(true);
 });
 
 window.addEventListener('keyup', function(e) {
-    if (e.keyCode == 37) leftDown = false;
-    if (e.keyCode == 39) rightDown = false;
+    if (e.key == "ArrowLeft") setLeft(false);
+    if (e.key == "ArrowRight") setRight(false);
 });
 
-
-const btnMoveLeft = document.querySelector("#move_left");
 btnMoveLeft.addEventListener("pointerdown", function (e) {
     e.preventDefault();
-    leftDown = true;
+    setLeft(true);
 });
 btnMoveLeft.addEventListener("pointerleave", function (e) {
     e.preventDefault();
-    leftDown = false;
+    setLeft(false);
 });
 btnMoveLeft.addEventListener("pointerup", function (e) {
     e.preventDefault();
-    leftDown = false;
+    setLeft(false);
 });
 
-const btnMoveRight = document.querySelector("#move_right");
 btnMoveRight.addEventListener("pointerdown", function (e) {
     e.preventDefault();
-    rightDown = true;
+    setRight(true);
 });
 btnMoveRight.addEventListener("pointerleave", function (e) {
     e.preventDefault();
-    rightDown = false;
+    setRight(false);
 });
 btnMoveRight.addEventListener("pointerup", function (e) {
     e.preventDefault();
-    rightDown = false;
+    setRight(false);
 });
+
 document.querySelector("#refresh").addEventListener("click", (e) => {
     e.preventDefault();
     window.location.reload(true);
