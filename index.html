@@ -105,8 +105,10 @@
             top: 10px;
         }
 
-        #mobile_controls .button:hover {
-            background: #0093fc;
+        #refresh {
+            color: #0093fc;
+            cursor: pointer;
+            text-decoration: underline;
         }
 
     </style>
@@ -119,7 +121,7 @@
 <body>
     <div id="container">
         <p id="score">Score: 0</p>
-        <p id='gg'>Good game! Refresh to play again.</span></p>
+        <p id='gg'>Good game! <a id="refresh" href="#">Play again?</a></p>
         <canvas width='358' height='360'></canvas>
         <div id="mobile_controls">
             <span class="button" id="move_left">&lt;</span>

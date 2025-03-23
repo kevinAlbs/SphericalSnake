@@ -71,6 +71,10 @@ btnMoveRight.addEventListener("pointerup", function (e) {
     e.preventDefault();
     rightDown = false;
 });
+document.querySelector("#refresh").addEventListener("click", (e) => {
+    e.preventDefault();
+    window.location.reload(true);
+})
 
 function regeneratePellet() {
     pellet = pointFromSpherical(Math.random() * Math.PI * 2, Math.random() * Math.PI);
