@@ -1,5 +1,5 @@
 // Angle representing the radius of one snake node.
-var NODE_ANGLE = Math.PI / 80;
+var NODE_ANGLE = Math.PI / 60;
 
 // This is the number of positions stored in the node queue.
 // This determines the velocity.
