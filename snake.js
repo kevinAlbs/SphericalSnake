@@ -77,6 +77,9 @@ btnMoveLeft.addEventListener("pointerup", function (e) {
     e.preventDefault();
     setLeft(false);
 });
+btnMoveLeft.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+});
 
 btnMoveRight.addEventListener("pointerdown", function (e) {
     e.preventDefault();
@@ -89,6 +92,9 @@ btnMoveRight.addEventListener("pointerleave", function (e) {
 btnMoveRight.addEventListener("pointerup", function (e) {
     e.preventDefault();
     setRight(false);
+});
+btnMoveRight.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
 });
 
 document.querySelector("#refresh").addEventListener("click", (e) => {
