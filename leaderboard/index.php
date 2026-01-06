@@ -81,6 +81,7 @@
     <div id="main">
 
         <h1>Spherical Snake Leaderboard - Top 100</h1>
+        <p>2026-01-06: Leaderboard postings disabled</p>
         <?php
 
         // Create/open the database
