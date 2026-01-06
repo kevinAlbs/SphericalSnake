@@ -3,6 +3,7 @@
 require_once ("secrets.php");
 
 echo json_encode(array('ok' => 0, 'msg' => 'Leaderboard disabled'));
+exit(0);
 
 // Create/open the database
 $db = new SQLite3('spherical_snake.db');
