@@ -77,6 +77,9 @@ if (!isset($_POST["scoreid"])) {
     errexit("Expected 'scoreid' but got none");
 }
 $scoreid = $_POST["scoreid"];
+if (strlen($scoreid) > 127) {
+    errexit("Expected 'scoreid' to be <= 127 characters, got: " . strlen($scoreid));
+}
 
 function get_int_field($key)
 {
