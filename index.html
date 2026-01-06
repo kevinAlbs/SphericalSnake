@@ -146,6 +146,12 @@
             </div>
         </div> <!-- #container -->
         <script src='leaderboard.js'></script>
+        <script>
+            // Prevent double-tap-zoom on iOS:
+            document.addEventListener("dblclick", (e) => {
+                e.preventDefault();
+            });
+        </script>
     <script src='snake.js'></script>
     
 </body>
