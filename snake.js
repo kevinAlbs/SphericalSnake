@@ -55,14 +55,22 @@ function setRight(val) {
     }
 }
 
+function updateSnakeVelocity(speeding)
+{
+    // The +1 is necessary since the queue excludes the current position.
+    snakeVelocity = NODE_ANGLE * 2 / (NODE_QUEUE_SIZE + 1) * (speeding ? 1.75 : 1.0);
+}
+
 window.addEventListener('keydown', function(e) {
     if (e.key == "ArrowLeft") setLeft(true);
     if (e.key == "ArrowRight") setRight(true);
+    if (e.key == " ") updateSnakeVelocity(true);
 });
 
 window.addEventListener('keyup', function(e) {
     if (e.key == "ArrowLeft") setLeft(false);
     if (e.key == "ArrowRight") setRight(false);
+    if (e.key == " ") updateSnakeVelocity(false);
 });
 
 btnMoveLeft.addEventListener("pointerdown", function (e) {
@@ -174,9 +182,8 @@ function init() {
     leftDown = false;
     rightDown = false;
     regeneratePellet();
+    updateSnakeVelocity(false);
 
-    // The +1 is necessary since the queue excludes the current position.
-    snakeVelocity = NODE_ANGLE * 2 / (NODE_QUEUE_SIZE + 1);
     var n = 40;
     for (var i = 0; i < n; i++) {
         for (var j = 0; j < n; j++) {
