@@ -126,8 +126,8 @@ function toggleDir() {
     } else {
         direction = orDir;
     }
-    document.querySelector("label[for=showDir]").innerText = orDir.toFixed(4);
-    document.querySelector("label[for=showDir2]").innerText = orDir.toFixed(1);
+    document.getElementById("show-dir1").innerText = orDir.toFixed(1);
+    document.getElementById("show-dir4").innerText = orDir.toFixed(4);
 }
 document.querySelector("#fixDir").addEventListener("input", function (e) {
     toggledTheDir = this.checked;

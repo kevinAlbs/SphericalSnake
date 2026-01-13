@@ -2,13 +2,13 @@
 
 <html lang='en'>
 <head>
+    <title>Spherical Snake arguably "bigger badder "better"!!1!</title>
+
     <meta charset='utf-8'>
     <meta name='description' content='Snake on a sphere'>
     <meta name='original author' content='Kevin Albertson'>
     <meta name='author of fork' content='naringas "BSE"'>
-
-    <title>Spherical Snake arguably "bigger badder "better"!!1!</title>
-
+    <link rel="icon" type="image/png" href="favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
     <style type='text/css'>
         * {
@@ -115,7 +115,9 @@
             font-size: 3em;
             font: fixed;
         }
-        #stuff label {
+        #stuff label,
+        #stuff span
+        {
             font-size: 8pt;
         }
 
@@ -134,29 +136,19 @@
             <span class="button" id="move_right">[🇩]</span>
         </div>
         <div id="stuff">
-            <!-- value=0 as in the snake's starting direction is 0,
-            which means rightwards along the horizontal -->
+            <!-- value=0 as in the snake's starting direction was 0; is at this moment Math.random(),
+            0 remains HARDCODED as the toggle OFF value; 0 means rightwards along the horizontal -->
             <label for="fixDir">[🇹]Toggle-Fix direction</label>
             <input id="showDir" readonly />
             <input type="checkbox" id="fixDir"/>
 
-
-            <label for="showDir">+-00.00 NaN</label>
+            <span id="show-dir4">+-00.00 NaN</span>
             <label>==</label>
-            <label for="showDir">0.0</label>
+            <span id="show-dir1">0.0</span>
         </div>
-        <div id="leaderboard_area">
-            <p>To play: Use arrow keys or buttons.</p>
-            <span style="display:none"><a href="#" id="submit_last_score" class="hidden"></a></span>
-            <div id="show_high_score_section">
-                <span id="high_score"></span><span style="display:none"><a href="#" id="submit_high_score" class="hidden"><!--DONT Submit to
-                    leaderboard--></a></span>
-                </div>
-                <div><a href="/spherical_snake/leaderboard/" target="_blank" id="show_high_score_link"><!--DONT See leaderboard--></a></div>
-                <p style="font-size:small; font-family:times;">Inspired (forked from) https://github.com/kevinAlbs/SphericalSnake; source on GitHub</p>
-            </div>
-            <button id="PUP">Power UP!</button>
-        </div> <!-- #container -->
+        <button title="+50 score-pellets" id="PUP">Power UP!</button>
+        <p style="font-size:small; font-family:times;">Inspired (forked from) https://github.com/kevinAlbs/SphericalSnake; source on GitHub</p>
+    </div> <!-- #container -->
 
         <script>
             // Prevent double-tap-zoom on iOS:
@@ -165,6 +157,5 @@
             });
         </script>
     <script src='snake.js'></script>
-    
 </body>
 </html>
