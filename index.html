@@ -2,27 +2,14 @@
 
 <html lang='en'>
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V3RS08GZ06"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-V3RS08GZ06');
-    </script>
-
     <meta charset='utf-8'>
     <meta name='description' content='Snake on a sphere'>
-    <meta name='author' content='Kevin Albertson'>
-    <title>Spherical Snake</title>
+    <meta name='original author' content='Kevin Albertson'>
+    <meta name='author of fork' content='naringas "BSE"'>
 
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <title>Spherical Snake arguably "bigger badder "better"!!1!</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
-
-    <!-- reCaptcha -->
-    <!-- <script src="https://www.google.com/recaptcha/enterprise.js?render=6Le6rvwqAAAAAIhHsQfZPb6pkU9nUnnkqD5mqADl"></script> -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6Le6rvwqAAAAAIhHsQfZPb6pkU9nUnnkqD5mqADl"></script>
     <style type='text/css'>
         * {
             margin: 0;
@@ -34,7 +21,7 @@
             font-family: monospace;
             touch-action: none;
         }
-        #score, #gg {
+        #score, #gg, .banner {
             font-size: 2em;
             margin: 0;
             text-align: center;
@@ -43,7 +30,7 @@
             padding: 10px 0px;
         }
         #container {
-            width: 360px;
+            width: 800px;
             margin: 10px auto;
             position: relative;
         }
@@ -55,15 +42,11 @@
     		display: block;
             background: #FFF;
     	}
-        #gg {
-            width: 360px;
+        .banner {
+            width: 800px;
             display: none;
             position: absolute;
-            top: 200px;
-        }
-        /* hide reCaptcha badge */
-        .grecaptcha-badge {
-            display: none !important;
+            bottom: 200px;
         }
 
         .hidden {
@@ -93,6 +76,7 @@
             position: absolute;
             cursor: pointer;
             touch-action: manipulation;
+            font-size: 10pt;
         }
 
         #move_left {
@@ -100,7 +84,7 @@
             width: 50px;
             height: 50px;
             text-align: center;
-            font-size: 50px;
+
             left: 10px;
             top: 10px;
             background: url("left.png") 18px 21px no-repeat #EEE;
@@ -111,7 +95,7 @@
             height: 50px;
             vertical-align: center;
             text-align: center;
-            font-size: 50px;
+
             right: 10px;
             top: 10px;
             background: url("right.png") 23px 21px no-repeat #EEE;
@@ -127,6 +111,14 @@
             text-decoration: underline;
         }
 
+        #stuff {
+            font-size: 3em;
+            font: fixed;
+        }
+        #stuff label {
+            font-size: 8pt;
+        }
+
     </style>
 
 </head>
@@ -134,24 +126,38 @@
 <body>
     <div id="container">
         <p id="score">Score: 0</p>
-        <p id='gg'>Good game! <a id="refresh" href="#">Play again?</a></p>
-        <canvas width='358' height='360'></canvas>
+        <p class="banner" id='gg'>Good game! <a id="refresh" href="#">Play again?</a></p>
+        <p class="banner" id='paused'>Paused</a></p>
+        <canvas width='800' height='800'></canvas>
         <div id="mobile_controls">
-            <span class="button" id="move_left"></span>
-            <span class="button" id="move_right"></span>
+            <span class="button" id="move_left">[🇦]</span>
+            <span class="button" id="move_right">[🇩]</span>
+        </div>
+        <div id="stuff">
+            <!-- value=0 as in the snake's starting direction is 0,
+            which means rightwards along the horizontal -->
+            <label for="fixDir">[🇹]Toggle-Fix direction</label>
+            <input id="showDir" readonly />
+            <input type="checkbox" id="fixDir"/>
+
+
+            <label for="showDir">+-00.00 NaN</label>
+            <label>==</label>
+            <label for="showDir">0.0</label>
         </div>
         <div id="leaderboard_area">
             <p>To play: Use arrow keys or buttons.</p>
             <span style="display:none"><a href="#" id="submit_last_score" class="hidden"></a></span>
             <div id="show_high_score_section">
-                <span id="high_score"></span><span style="display:none"><a href="#" id="submit_high_score" class="hidden">Submit to
-                    leaderboard</a></span>
+                <span id="high_score"></span><span style="display:none"><a href="#" id="submit_high_score" class="hidden"><!--DONT Submit to
+                    leaderboard--></a></span>
                 </div>
-                <div><a href="/spherical_snake/leaderboard/" target="_blank" id="show_high_score_link">See leaderboard</a></div>
-                <p>See <a href="https://github.com/kevinAlbs/SphericalSnake">source on GitHub</a></p>
+                <div><a href="/spherical_snake/leaderboard/" target="_blank" id="show_high_score_link"><!--DONT See leaderboard--></a></div>
+                <p style="font-size:small; font-family:times;">Inspired (forked from) https://github.com/kevinAlbs/SphericalSnake; source on GitHub</p>
             </div>
+            <button id="PUP">Power UP!</button>
         </div> <!-- #container -->
-        <script src='leaderboard.js'></script>
+
         <script>
             // Prevent double-tap-zoom on iOS:
             document.addEventListener("dblclick", (e) => {

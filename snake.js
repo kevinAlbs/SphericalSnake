@@ -1,11 +1,12 @@
 // Angle representing the radius of one snake node.
-var NODE_ANGLE = Math.PI / 60;
+var NODE_ANGLE = Math.PI / 70;
 
 // This is the number of positions stored in the node queue.
 // This determines the velocity.
 var NODE_QUEUE_SIZE = 9;
 
-var STARTING_DIRECTION = Math.PI / 4;
+var STARTING_DIRECTION = Math.random();
+var PAUSED = false;
 
 var cnv, ctx, width, height, centerX, centerY, points, stopped;
 
@@ -27,7 +28,7 @@ var collisionDistance = 2 * Math.sin(NODE_ANGLE);
 // The angle of the current snake direction in radians.
 var direction = STARTING_DIRECTION;
 
-var focalLength = 200;
+var focalLength = 500;
 
 var leftDown, rightDown;
 
@@ -55,14 +56,28 @@ function setRight(val) {
     }
 }
 
+function togglePause() {
+    if (PAUSED) {
+        PAUSED = false;
+        delBanners();
+        window.requestAnimationFrame(update);
+    } else {
+        PAUSED = true;
+        document.getElementById('paused').style = 'display:block';
+    }
+}
+
 window.addEventListener('keydown', function(e) {
-    if (e.key == "ArrowLeft") setLeft(true);
-    if (e.key == "ArrowRight") setRight(true);
+    if (e.key == "ArrowLeft"  || e.code == "KeyA") setLeft(true);
+    if (e.key == "ArrowRight" || e.code == "KeyD") setRight(true);
+
+    if (e.code == "Space") togglePause();
 });
 
 window.addEventListener('keyup', function(e) {
-    if (e.key == "ArrowLeft") setLeft(false);
-    if (e.key == "ArrowRight") setRight(false);
+    if (e.key == "ArrowLeft"  || e.code == "KeyA") setLeft(false);
+    if (e.key == "ArrowRight" || e.code == "KeyD") setRight(false);
+    if (e.code == "KeyT") document.getElementById("fixDir").click();
 });
 
 btnMoveLeft.addEventListener("pointerdown", function (e) {
@@ -100,6 +115,41 @@ btnMoveRight.addEventListener("contextmenu", function (e) {
 document.querySelector("#refresh").addEventListener("click", (e) => {
     e.preventDefault();
     window.location.reload(true);
+})
+
+let orDir = direction;
+let toggledTheDir = document.getElementById("fixDir"); //interface controls the visual-default
+function toggleDir() {
+    if (toggledTheDir) {
+        orDir = direction;
+        direction = 0;
+    } else {
+        direction = orDir;
+    }
+    document.querySelector("label[for=showDir]").innerText = orDir.toFixed(4);
+    document.querySelector("label[for=showDir2]").innerText = orDir.toFixed(1);
+}
+document.querySelector("#fixDir").addEventListener("input", function (e) {
+    toggledTheDir = this.checked;
+    toggleDir();
+})
+
+document.querySelector("#PUP").addEventListener("click", function (e) {
+    const augment = function(count, delay) {
+        const interval = setInterval(() => {
+            incrementScore();
+            addSnakeNode();
+            if (--count <= 0) clearInterval(interval);
+        }, delay);
+        return interval;
+    };
+    augment(50, 50);
+    // set and unset disabled
+    this.disabled = true;
+    setInterval(() => {
+        this.disabled=false
+    }, 2250)
+    e.preventDefault();
 })
 
 function regeneratePellet() {
@@ -186,6 +236,7 @@ function init() {
     }
     snake = [];
     for (var i = 0; i < 8; i++) addSnakeNode();
+
     window.requestAnimationFrame(update);
 }
 
@@ -208,14 +259,20 @@ function update() {
         
         if (leftDown) direction -= .08;
         if (rightDown) direction += .08;
-    
+        document.getElementById("showDir").value = direction;
+
         applySnakeRotation();
         rotateZ(-direction);
         rotateY(-snakeVelocity);
         rotateZ(direction);
     }
     render();
-    window.requestAnimationFrame(update);
+    if (PAUSED) {
+        //block the animationframe
+        return
+    } else {
+        window.requestAnimationFrame(update);
+    }
 }
 
 // Radius is given in angle and is drawn based on depth.
@@ -267,15 +324,24 @@ function render() {
     ctx.strokeStyle = "#FFF";
     ctx.lineWidth = 3;
     ctx.stroke();
+
     ctx.lineWidth = 1;
+
 
     // Draw circle.
     ctx.beginPath();
-    ctx.strokeStyle = "rgb(0,0,0)";
+    ctx.strokeStyle = "#AAA";
 
-    // The radius value was determined experimentally.
-    // TODO: figure out the math behind this.
-    ctx.arc(centerX, centerY, .58 * focalLength, 0, Math.PI * 2);
+    // The radius value was determined experimentally; and then further tweaked manually.
+    ctx.arc(centerX, centerY, .53 * focalLength, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.strokeStyle = "rgb(10,10, 10)";
+    ctx.beginPath();
+    // ctx.arc(centerX, centerY, .58 * focalLength, 0, Math.PI * 2); //original "calculation"
+    // ctx.stroke();
+    // ctx.beginPath();
+    ctx.arc(centerX, centerY, .60009 * focalLength, 0, Math.PI * 2);
     ctx.stroke();
 }
 
@@ -357,9 +423,14 @@ function checkCollisions() {
 }
 
 function showEnd() {
-    document.getElementsByTagName('body')[0].style = 'background: #E8E8E8';
+    // document.getElementsByTagName('body')[0].style = 'background: #E8E8E8';
     document.getElementById('gg').style = 'display:block';
     stopped = true;
+}
+
+function delBanners() {
+    document.getElementById('gg').style = 'display:none';
+    document.getElementById('paused').style = 'display:none';
 }
 
 init();
