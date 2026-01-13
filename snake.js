@@ -330,13 +330,13 @@ function render() {
 
     // Draw circle.
     ctx.beginPath();
-    ctx.strokeStyle = "#AAA";
+    ctx.strokeStyle = "rgb(10,10, 10)";
 
     // The radius value was determined experimentally; and then further tweaked manually.
     ctx.arc(centerX, centerY, .53 * focalLength, 0, Math.PI * 2);
     ctx.stroke();
 
-    ctx.strokeStyle = "rgb(10,10, 10)";
+    ctx.strokeStyle = "#AAA";
     ctx.beginPath();
     // ctx.arc(centerX, centerY, .58 * focalLength, 0, Math.PI * 2); //original "calculation"
     // ctx.stroke();
